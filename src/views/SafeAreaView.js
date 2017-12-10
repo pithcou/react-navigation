@@ -8,6 +8,7 @@ import {
   SafeAreaView,
   StyleSheet,
   View,
+  Animated
 } from 'react-native';
 import withOrientation from './withOrientation';
 
@@ -101,19 +102,19 @@ class SafeView extends Component {
     const { forceInset = false, isLandscape, children, style } = this.props;
 
     if (Platform.OS !== 'ios') {
-      return <View style={style}>{this.props.children}</View>;
+      return <Animated.View style={style}>{this.props.children}</Animated.View>;
     }
 
     const safeAreaStyle = this._getSafeAreaStyle();
 
     return (
-      <View
+      <Animated.View
         ref={c => (this.view = c)}
         onLayout={this._onLayout}
         style={safeAreaStyle}
       >
         {this.props.children}
-      </View>
+      </Animated.View>
     );
   }
 
